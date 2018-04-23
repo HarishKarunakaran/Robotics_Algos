@@ -3,15 +3,16 @@
 #include <map>
 #include <queue>
 #include <cmath>
+#include <set>
 
-class Djikstra{
+class BFS{
     typedef std::pair<int, int> position;
 public:
-    Djikstra();
+    BFS();
     std::map<position, std::vector<position> > compute_map(std::vector<std::vector<int> >&);
     double heuristic(position, position);
     std::vector<position > search(std::vector<std::vector<int> >&, position& , position&);
-    ~Djikstra();
+    ~BFS();
 };
 
 template<typename T, typename priority_t>

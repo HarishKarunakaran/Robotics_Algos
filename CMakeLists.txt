@@ -24,6 +24,9 @@ add_library(${PROJECT_NAME} SHARED
         ${CMAKE_CURRENT_SOURCE_DIR}/src/A*/astar.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/ARA*/arastar.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/ANA*/anastar.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/BFS/BFS.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/DFS/DFS.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Djikstra/djikstra.cpp
 )
 
 install(DIRECTORY include/${PROJECT_NAME} DESTINATION include
@@ -33,8 +36,16 @@ add_executable(kalman_filter ${CMAKE_CURRENT_SOURCE_DIR}/src/Kalman_filter/kalma
 add_executable(astar ${CMAKE_CURRENT_SOURCE_DIR}/src/A*/astar_test.cpp)
 add_executable(arastar ${CMAKE_CURRENT_SOURCE_DIR}/src/ARA*/arastar_test.cpp)
 add_executable(anastar ${CMAKE_CURRENT_SOURCE_DIR}/src/ANA*/anastar_test.cpp)
+add_executable(bfs ${CMAKE_CURRENT_SOURCE_DIR}/src/BFS/BFS_test.cpp)
+add_executable(dfs ${CMAKE_CURRENT_SOURCE_DIR}/src/DFS/DFS_test.cpp)
+add_executable(djikstra ${CMAKE_CURRENT_SOURCE_DIR}/src/Djikstra/djikstra_test.cpp)
+
 target_link_libraries(kalman_filter ${PROJECT_NAME} ${Boost_LIBRARIES})
 target_link_libraries(astar ${PROJECT_NAME})
 target_link_libraries(arastar ${PROJECT_NAME})
 target_link_libraries(anastar ${PROJECT_NAME})
+target_link_libraries(bfs ${PROJECT_NAME})
+target_link_libraries(dfs ${PROJECT_NAME})
+target_link_libraries(djikstra ${PROJECT_NAME})
+
 

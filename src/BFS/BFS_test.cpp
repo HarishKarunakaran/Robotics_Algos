@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Djikstra/djikstra.h"
+#include "BFS/BFS.h"
 
 int main()
 {
@@ -11,8 +11,7 @@ int main()
                                                   {0, 0, 0, 0, 0, 0}};
     std::pair<int, int> a = {2, 0};
     std::pair<int, int> b = {5, 5};
-
-    Djikstra c;
+    BFS c;
     std::vector<std::pair<int, int> > path = c.search(world_state, a, b);
 
     for(const auto& p : path)
