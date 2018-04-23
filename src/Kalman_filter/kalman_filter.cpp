@@ -1,12 +1,12 @@
-#include<Kalman_filter/kalman_filter.h>
+#include "Kalman_filter/kalman_filter.h"
 
 
-matrix<double> Kalmanfilter::state() const
+vector<double> Kalmanfilter::state() const
 {
     return state_;
 }
 
-void Kalmanfilter::setState(const matrix<double>& state)
+void Kalmanfilter::setState(const vector<double>& state)
 {
     state_ = state;
 }
@@ -73,30 +73,29 @@ void Kalmanfilter::setQ_matrix(const matrix<double>& q_matrix)
 }
 
 
-matrix<double> Kalmanfilter::control_input() const
+vector<double> Kalmanfilter::control_input() const
 {
     return control_input_;
 }
 
-void Kalmanfilter::setControl_input(const matrix<double>& control_input)
+void Kalmanfilter::setControl_input(const vector<double>& control_input)
 {
     control_input_ = control_input;
 }
 
-Kalmanfilter::Kalmanfilter(const matrix<double>& mean, const matrix<double>& covariance) : state_(mean), covariance_(covariance)
+Kalmanfilter::Kalmanfilter(const vector<double>& mean, const matrix<double>& covariance) : state_(mean), covariance_(covariance)
 {
 
 }
 
-Kalmanfilter::Kalmanfilter(size_t size) : state_(size, 1), covariance_(size, size)
+Kalmanfilter::Kalmanfilter(size_t size) : state_(size), covariance_(size, size)
 {
-    for(unsigned int i = 0; i < state_.size1(); ++i)
-            for(unsigned int j = 0; j < state_.size2(); ++j)
-                state_(i, j) = 0;
+    for(size_t i = 0; i < size; ++i)
+                state_(i) = 0;
 
-    for(unsigned int i = 0; i < covariance_.size1(); ++i)
+    for(size_t i = 0; i < size; ++i)
     {
-            for(unsigned int j = 0; j < covariance_.size2(); ++j)
+            for(size_t j = 0; j < size; ++j)
             {
                 if(i==j)
                     covariance_(i, j) = 1;
@@ -118,11 +117,11 @@ void Kalmanfilter::measure()
 
 void Kalmanfilter::predict(unsigned int del_t)
 {
-    for(unsigned int t = 0; t < 5; t += del_t)
-    {
+    //for(unsigned int t = 0; t < 5; t += del_t)
+    //{
         state_ = prod(a_matrix_, state_) + prod(b_matrix, control_input_);
         covariance_ = prod(matrix<double>(prod(a_matrix_, covariance_)), matrix<double>(trans(a_matrix_))) + r_matrix_;
-    }
+    //}
 }
 
 void Kalmanfilter::update()
